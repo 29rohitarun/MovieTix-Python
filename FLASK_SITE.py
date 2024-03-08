@@ -7,4 +7,4 @@ def chatbot():
     return render_template('TIX.html')
 
 if __name__ == '__main__':
-    app.run(debug=True, port=3000)
+    app.run(debug=False, port='0.0.0.0')
