@@ -5,57 +5,110 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
+
 
 
 options = Options()
 options.add_experimental_option("detach", True)
 
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),
-                      options=options)
+def scrape():
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),
+                        options=options)
 
-driver.get("https://www.fandango.com/")
+    driver.get("https://www.fandango.com/")
 
-# Wait for the user to click on a specific link or button that leads to the desired webpage
-# For example, you can wait for the user to click on a movie link
-wait = WebDriverWait(driver, 10)
-movie_link = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="movie_link"]')))
-movie_link.click()
 
-# Once the user is on the specific webpage, wait for it to fully render
-# (Assuming the webpage has a specific element you can wait for)
-wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="desired_element"]')))
+    try:
+                
+        wrapper = WebDriverWait(driver, 600).until(
+            EC.url_contains("Checkout?"))
+        
+        print("In checkout page")
+        
+    except:
+        print("There was an error")
+        exit()
 
-links = driver.find_elements(By.XPATH, '//button[text()="]')
+    try:
+        title = driver.find_element(By.CLASS_NAME, 'movie-theater__movie-title')
+        title_string = title.get_attribute('innerHTML')
+        print(title_string)
+    except:
+        print("There was an exception for title")
+        pass
 
-'''
-from bs4 import BeautifulSoup
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+    try:
+        theater = driver.find_element(By.CLASS_NAME, 'movie-theater__theater-name')
+        theater_string = theater.get_attribute('innerHTML')
+        print(theater_string)
+    except:
+        print("There was an exception for theater")
+        pass
 
-# Initialize Chrome driver
-driver = webdriver.Chrome()
-driver.get('https://www.fandango.com/')
+    try:
+        address = driver.find_element(By.CLASS_NAME, 'movie-theater__address')
+        address_string = address.get_attribute('innerHTML')
+        print(address_string)
+    except:
+        print("There was an exception for address")
+        pass
 
-# Simulate user interactions to navigate to the checkout page
-# Example: Click on a movie, select tickets, proceed to checkout, etc.
+    try:
+        auditorium = driver.find_element(By.ID, 'auditorium')
+        auditorium_string = auditorium.get_attribute('innerHTML')
+        print(auditorium_string)
+    except:
+        print("There was an exception for auditorium")
+        pass
 
-# Once you reach the checkout page, wait for it to fully render
-# (Assuming the checkout page has a specific element you can wait for)
-wait = WebDriverWait(driver, 10)
-checkout_element = wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="checkout_button"]')))
+    try:
+        seats = driver.find_element(By.CLASS_NAME, 'seat-selection__reserved-seats')
+        seats_string = seats.get_attribute('innerHTML')
+        print(seats_string)
+    except:
+        print("There was an exception for seats")
+        pass
 
-# Get the page source after JavaScript execution
-page_source = driver.page_source
+    try:
+        datetime = driver.find_element(By.CLASS_NAME, 'movie-theater__show-date-time')
+        datetime_string = datetime.get_attribute('innerHTML')
 
-# Close the driver
-driver.quit()
+        datetime_arr = datetime_string.split(' at ')
 
-# Parse the page source using BeautifulSoup
-soup = BeautifulSoup(page_source, 'html.parser')
+        date = datetime_arr[0].strip()
+        time = datetime_arr[1].strip()
 
-print("printing")
-print(soup)
+        print(date)
+        print(time)
+    except:
+        print("There was an exception for datetime")
+        pass
 
-'''
+
+    try:
+        tix = driver.find_element(By.ID, 'TicketSelectionEditQtyBtn')
+        tix_string = tix.get_attribute('innerHTML')
+        print(tix_string)
+
+    except:
+        print("There was an exception for tix")
+        pass
+
+    try:
+        price = driver.find_element(By.CLASS_NAME, 'order-summary__total-price')
+        price_string = price.get_attribute('innerHTML')
+        print(price_string)
+
+    except:
+        print("There was an exception for price")
+        pass
+
+def main():
+
+    scrape()
+
+if __name__ == '__main__':
+    main()
+
+
