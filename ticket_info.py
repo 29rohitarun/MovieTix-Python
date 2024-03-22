@@ -6,13 +6,14 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
-
-
+import process
 
 options = Options()
 options.add_experimental_option("detach", True)
 
 def scrape():
+
+    scrape_arr = [""] * 10
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),
                         options=options)
 
@@ -33,14 +34,26 @@ def scrape():
     try:
         title = driver.find_element(By.CLASS_NAME, 'movie-theater__movie-title')
         title_string = title.get_attribute('innerHTML')
+        scrape_arr[0] = title_string
         print(title_string)
     except:
         print("There was an exception for title")
         pass
 
+
+    try:
+        rating = driver.find_element(By.CLASS_NAME, 'movie-theater__movie-rating')
+        rating_string = rating.get_attribute('innerHTML')
+        scrape_arr[1] = rating_string
+        print(rating_string)
+    except:
+        print("There was an exception for rating")
+        pass
+
     try:
         theater = driver.find_element(By.CLASS_NAME, 'movie-theater__theater-name')
         theater_string = theater.get_attribute('innerHTML')
+        scrape_arr[2] = theater_string
         print(theater_string)
     except:
         print("There was an exception for theater")
@@ -50,6 +63,7 @@ def scrape():
         address = driver.find_element(By.CLASS_NAME, 'movie-theater__address')
         address_string = address.get_attribute('innerHTML')
         print(address_string)
+        scrape_arr[3] = address_string
     except:
         print("There was an exception for address")
         pass
@@ -57,6 +71,7 @@ def scrape():
     try:
         auditorium = driver.find_element(By.ID, 'auditorium')
         auditorium_string = auditorium.get_attribute('innerHTML')
+        scrape_arr[4] = auditorium_string
         print(auditorium_string)
     except:
         print("There was an exception for auditorium")
@@ -65,6 +80,7 @@ def scrape():
     try:
         seats = driver.find_element(By.CLASS_NAME, 'seat-selection__reserved-seats')
         seats_string = seats.get_attribute('innerHTML')
+        scrape_arr[5] = seats_string
         print(seats_string)
     except:
         print("There was an exception for seats")
@@ -79,16 +95,19 @@ def scrape():
         date = datetime_arr[0].strip()
         time = datetime_arr[1].strip()
 
+        scrape_arr[6] = date
+        scrape_arr[7] = time
+
         print(date)
         print(time)
     except:
         print("There was an exception for datetime")
         pass
 
-
     try:
         tix = driver.find_element(By.ID, 'TicketSelectionEditQtyBtn')
         tix_string = tix.get_attribute('innerHTML')
+        scrape_arr[8] = tix_string
         print(tix_string)
 
     except:
@@ -98,15 +117,18 @@ def scrape():
     try:
         price = driver.find_element(By.CLASS_NAME, 'order-summary__total-price')
         price_string = price.get_attribute('innerHTML')
+        scrape_arr[9] = price_string
         print(price_string)
 
     except:
         print("There was an exception for price")
         pass
 
+    return scrape_arr
+
 def main():
 
-    scrape()
+    return process.main(scrape())
 
 if __name__ == '__main__':
     main()

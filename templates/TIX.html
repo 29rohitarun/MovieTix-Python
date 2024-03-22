@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -36,38 +35,38 @@
             <div class="col-2 col">
                 <div class="pah-movie-title">
                     <ul>
-                        <li><h1>Dune: Part Two</h1></li>
-                        <li id="rating">PG-13</li> 
+                        <li><h1>{{ info_arr[0] }}</h1></li>
+                        <li id="rating">{{ info_arr[1] }}</li> 
                     </ul>        
                 </div>
                 <div class="col-2-1 col">
                     <ul class="auditorium">
-                        <li><strong>Paragon Fenton + Axis15 Extreme</strong></li>
-                        <li> 21 Fenton Main St</li>
+                        <li><strong>{{ info_arr[2] }}</strong></li>
+                        <li> {{ info_arr[3] }}</li>
                         <li>Suite 110</li>
                         <li>Cary,&nbsp;NC&nbsp;27511</li>
                         <li></li>
                     </ul>
                      <ul class="pah-time">    
                         <li><strong>Date</strong></li>        
-                        <li>Fri&nbsp;March 8, 2024</li>
+                        <li>Fri&nbsp;{{ info_arr[6] }}</li>
                         
                     </ul>
                     <ul>
                         <li><strong>Tickets</strong></li>
-                        <li>1 Adult</li>
-                        <li>Total: $14.52</li> 
+                        <li>{{ info_arr[8] }}</li>
+                        <li>Total: {{ info_arr[9] }}</li> 
                     </ul> 
                 </div>
                 <div class="col-2-2 col">
                      <ul class="pah-ticket">
                         <li><strong>Seats</strong></li>
-                        <li>Auditorium 5</li> 
-                       <li>B13</li><li class='reserved-seating'>Reserved Seating</li>
+                        <li>{{ info_arr[4] }}</li> 
+                       <li>{{ info_arr[5] }}</li><li class='reserved-seating'>Reserved Seating</li>
                     </ul>
                     <ul>
                         <li><strong>Time</strong></li>
-                        <li>6:00pm</li>
+                        <li>{{ info_arr[7] }}</li>
                     </ul>
                     <ul>
                         <li><strong>Confirmation</strong></li>

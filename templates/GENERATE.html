@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generate Fandango Ticket</title>
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    
+    .button {
+        background-color: orange;
+        border: none;
+        color: white;
+        padding: 20px 40px; /* Larger padding */
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 24px; /* Larger font size */
+        margin: 0;
+        cursor: pointer;
+        border-radius: 8px;
+    }
+</style>
+</head>
+<body>
+
+<button class="button" onclick="generateTicket()">Generate Fandango Ticket</button>
+
+<script>
+    function generateTicket() {
+        fetch('/generate_ticket')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            // Redirect to TIX.html
+            window.location.href = '/show_ticket';
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+    }
+</script>
+
+</body>
+</html>
