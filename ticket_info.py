@@ -9,6 +9,8 @@ from selenium.common.exceptions import TimeoutException
 import process
 
 options = Options()
+user_agent = 'jaycurry'
+options.add_argument(f'user-agent={user_agent}')
 options.add_experimental_option("detach", True)
 
 def scrape():
@@ -124,11 +126,14 @@ def scrape():
         print("There was an exception for price")
         pass
 
+    driver.close()
+
     return scrape_arr
 
 def main():
 
-    return process.main(scrape())
+    arr = process.main(scrape())
+    return arr
 
 if __name__ == '__main__':
     main()

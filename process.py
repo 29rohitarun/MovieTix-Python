@@ -1,6 +1,5 @@
 import datetime
 
-
 def process_array(arr):
     # rating format
     arr[1] = arr[1].split(',')[0].strip()
@@ -20,8 +19,10 @@ def process_array(arr):
     arr[8] = tix.strip()
     print(arr[8])
 
+    return arr
+
 def main(unprocessed_arr):
-    process_array(unprocessed_arr)
+    return process_array(unprocessed_arr)
 
 if __name__ == '__main__':
     main()
