@@ -26,5 +26,4 @@ def show_ticket():
     return render_template('TIX.html', info_arr=info_arr)
 
 if __name__ == '__main__':
-    app.debug = True
     app.run()
