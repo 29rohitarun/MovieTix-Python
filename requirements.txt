@@ -1,3 +1,5 @@
 Flask
 Gunicorn
 selenium
+datetime
+webdriver_manager
